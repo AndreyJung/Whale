@@ -24,4 +24,8 @@ public class SampleServiceImpl implements SampleService {
 		return sampleDAO.selectBoardList(map);
 	}
 	
+	public List<Map<String, Object>> getCompanyList(Map<String, Object> map) throws Exception{
+		// TODO Auto-generated method stub
+		return sampleDAO.getCompanyList(map);
+	}
 }

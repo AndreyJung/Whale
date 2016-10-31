@@ -11,4 +11,19 @@
                 whale_user
         ]]>
  	</select>
+ 	
+ 	<select id="getCompanyList" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+            SELECT
+                GROUP_CD,
+                GROUP_NM,
+                CMPY_CD,
+                CMPY_NM,
+                EMPLYS_CNT
+            FROM
+                whale_cmpy_info
+        ]]>
+ 	</select>
+ 	
+ 	
  </mapper>

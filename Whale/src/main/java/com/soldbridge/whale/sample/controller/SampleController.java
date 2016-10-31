@@ -28,4 +28,14 @@ public class SampleController {
          
         return mv;
     }
+    
+    @RequestMapping(value="/sample/getCompanyList.do")
+    public ModelAndView getCompanyList(Map<String,Object> commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("getCompanyList");
+         
+        List<Map<String,Object>> list = sampleService.getCompanyList(commandMap);
+        mv.addObject("list", list);
+         
+        return mv;
+    }
 }
