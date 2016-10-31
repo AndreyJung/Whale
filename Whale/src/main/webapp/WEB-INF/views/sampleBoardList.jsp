@@ -40,41 +40,5 @@
          
     </tbody>
 </table>
-
-<h2>회사별 직원수</h2>
-<table style="border:1px solid #ccc">
-    <colgroup>
-        <col width="30%"/>
-        <col width="*"/>
-    </colgroup>
-    <thead>
-        <tr>
-        	<th>그룹사</th>
-            <th scope="col">회사</th>
-            <th scope="col">임직원</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:choose>
-            <c:when test="${fn:length(list) > 0}">
-                <c:forEach items="${list }" var="row">
-                    <tr>
-                    	<td>${row.GROUP_NM }</td>
-                        <td>${row.CMPY_NM }</td>
-                        <td>${row.EMPLYS_CNT }</td>
-                    </tr>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <tr>
-                    <td colspan="4">조회된 결과가 없습니다.</td>
-                </tr>
-            </c:otherwise>
-        </c:choose>
-         
-    </tbody>
-</table>
-
-
 </body>
 </html>
