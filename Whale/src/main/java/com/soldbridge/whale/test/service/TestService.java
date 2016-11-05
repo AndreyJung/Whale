@@ -12,4 +12,6 @@ public interface TestService {
 	List<Map<String, Object>> selectTestTotRepuParam(Map<String, Object> commandMap) throws Exception;
 	
 	List<Map<String, Object>> selectIFTestCompanyList(Map<String, Object> commandMap) throws Exception;
+	
+	List<Map<String, Object>> selectIFTestUserList(Map<String, Object> commandMap) throws Exception;
 }

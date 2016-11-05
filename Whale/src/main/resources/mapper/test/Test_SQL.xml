@@ -31,7 +31,7 @@
 			where 
 				a.user_id = b.user_id 
 				and 
-				a.repu_type_cd = '01';
+				a.repu_type_cd = #{repu_type_cd};
         ]]>
  	</select>
  	
@@ -40,9 +40,21 @@
  			SELECT 
  				*
  			FROM
- 				whale_cmpy_info 		
+ 				whale_cmpy_info;		
  		]]>
+ 	</select>
  	
+ 	<select id="selectIFTestUserList" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+ 			SELECT 
+				*
+			FROM
+				whale_user
+			WHERE 
+				group_cd = #{group_cd}
+				AND
+				cmpy_cd = #{cmpy_cd};	
+ 		]]>
  	</select>
  	
  	
