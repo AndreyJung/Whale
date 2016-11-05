@@ -21,7 +21,8 @@
  	
  	<select id="selectTestTotRepuParam" parameterType="hashmap" resultType="hashmap">
  		<![CDATA[
-			select 
+			select
+				rownum, 
 				a.repu_type_nm, 
 				b.user_nm, 
 				b.thumbnail
