@@ -25,6 +25,11 @@ public class TestDAO extends AbstractDAO{
 	public List<Map<String, Object>> selectIFTestCompanyList(Map<String, Object> map) {
 		return (List<Map<String, Object>>)selectList("selectIFTestCompanyList",map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectIFTestUserList(Map<String, Object> map){
+		return (List<Map<String, Object>>)selectList("selectIFTestUserList",map);
+	}
 }
 
 
