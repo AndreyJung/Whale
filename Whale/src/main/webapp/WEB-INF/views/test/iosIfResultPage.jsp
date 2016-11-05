@@ -7,6 +7,6 @@
 <title>iosIfResultPage</title>
 </head>
 <body>
-${jsonStr}
+${data}
 </body>
 </html>
