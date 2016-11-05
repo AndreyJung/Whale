@@ -92,16 +92,4 @@ public class TestController {
 		return jsonStr;
 	}
 	
-	@RequestMapping(value="/test/selectIFTestUserList.do", produces = "application/json; charset=utf8")
-	public @ResponseBody String selectIFTestUserList(CommandMap commandMap) throws Exception{
-		ObjectMapper om = new ObjectMapper();
-		List<Map<String, Object>> list = testService.selectIFTestUserList(commandMap.getMap());
-		
-		// Map or List Object 를 JSON 문자열로 변환
-		String jsonStr = om.writeValueAsString(list);
-		log.info("object to json : " + jsonStr);		
-		jsonStr = "{ \"result\" : "+jsonStr+" }";		
-		return jsonStr;
-	}
-	
 }

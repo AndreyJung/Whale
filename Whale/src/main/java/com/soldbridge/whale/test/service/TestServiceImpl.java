@@ -33,9 +33,4 @@ public class TestServiceImpl implements TestService {
 	public List<Map<String, Object>> selectIFTestCompanyList(Map<String, Object> map) throws Exception{
 		return testDAO.selectIFTestCompanyList(map);
 	}
-	
-	@Override
-	public List<Map<String, Object>> selectIFTestUserList(Map<String, Object> map) throws Exception{
-		return testDAO.selectIFTestUserList(map);
-	}
 }
