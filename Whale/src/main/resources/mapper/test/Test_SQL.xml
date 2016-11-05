@@ -22,16 +22,16 @@
  	<select id="selectTestTotRepuParam" parameterType="hashmap" resultType="hashmap">
  		<![CDATA[
 			select
-				rownum, 
+				@ROWNUM := @ROWNUM + 1 AS ROWNUM, 
 				a.repu_type_nm, 
 				b.user_nm, 
 				b.thumbnail
 			from 
-				whale_tot_repu a, whale_user b
+				whale_tot_repu a, whale_user b, (SELECT @ROWNUM := 0) R
 			where 
 				a.user_id = b.user_id 
 				and 
-				a.repu_type_cd = #{repu_type_cd};
+				a.repu_type_cd = '01';
         ]]>
  	</select>
  	
