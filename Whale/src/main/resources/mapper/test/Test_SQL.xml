@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="sample">
+ 	 <select id="selectTestTotRepu" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+            SELECT 
+				user_id,
+				repu_type_cd,
+				repu_type_nm,
+				tot_repu_star_cnt,
+				tot_cnt,
+				avr_star_cnt,
+				cre_dt,
+				cre_id,
+				upd_dt,
+				upd_id 
+			FROM whale_tot_repu;
+        ]]>
+ 	</select>
+ 	
+ 	<select id="selectTestTotRepuParam" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+			select
+				@ROWNUM := @ROWNUM + 1 AS ROWNUM, 
+				a.repu_type_nm, 
+				b.user_nm, 
+				b.thumbnail
+			from 
+				whale_tot_repu a, whale_user b, (SELECT @ROWNUM := 0) R
+			where 
+				a.user_id = b.user_id 
+				and 
+				a.repu_type_cd = #{repu_type_cd};
+        ]]>
+ 	</select>
+ 	
+ 	<select id="selectIFTestCompanyList" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+ 			SELECT 
+ 				*
+ 			FROM
+ 				whale_cmpy_info;		
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="selectIFTestUserList" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+ 			SELECT 
+				*
+			FROM
+				whale_user
+			WHERE 
+				group_cd = #{group_cd}
+				AND
+				cmpy_cd = #{cmpy_cd};	
+ 		]]>
+ 	</select>
+ 	
+ 	
+ </mapper>
