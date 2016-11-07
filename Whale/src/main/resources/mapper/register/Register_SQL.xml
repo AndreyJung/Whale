@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="register">
+ 	<insert id="insertUserMst" parameterType="hashmap" >
+ 		<![CDATA[
+            INSERT INTO whale_user_mst
+                     ( 
+					   user_id
+					  ,password
+					  ,user_nm
+					  ,last_login_date
+					  ,cre_dt
+					  ,cre_id
+					  ,upd_dt
+					  ,upd_id
+					  ) VALUES
+					  (
+					   #{USER_ID}#
+					  ,#{PASSWORD}#
+					  ,#{USER_NM}#
+					  ,NOW()
+					  ,NOW()
+					  ,#{USER_ID}#
+					  ,NOW()
+					  ,#{USER_ID}#
+					  )
+					  
+  
+                       
+        ]]>
+ 	</insert>
+ </mapper>
