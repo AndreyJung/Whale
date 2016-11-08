@@ -20,7 +20,7 @@ public class RegisterDAO extends AbstractDAO{
 	@SuppressWarnings("unchecked")
 	public int insertUserInfo(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		int result = (Integer)insert("register.insertUserMst", map);
+		int result = (Integer)insert("register.insertUserInfo", map);
 		return result;
 	}
  

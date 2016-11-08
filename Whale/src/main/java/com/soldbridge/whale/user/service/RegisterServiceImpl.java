@@ -55,13 +55,15 @@ public class RegisterServiceImpl implements RegisterService {
 	    
 	    
 	    List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(map, request);
-        for(int i=0, size=list.size(); i<size; i++){
+	    int result = 0;
+	    for(int i=0, size=list.size(); i<size; i++){
         	 map.put("THUMBNAIL", list.get(i).get("ORIGINAL_FILE_NAME"));
-        	registerDAO.insertUserInfo(map);
+        	 log.debug("FOR USER_INFO FILE NAME IS "+list.get(i).get("ORIGINAL_FILE_NAME"));
+        	result = registerDAO.insertUserInfo(map);
         }
 		
 		// TODO Auto-generated method stub
-		return ""+registerDAO.insertUserInfo(map);
+		return ""+result;
 	}
 	
 }
