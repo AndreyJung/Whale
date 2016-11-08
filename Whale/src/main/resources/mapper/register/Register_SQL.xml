@@ -30,4 +30,52 @@
                        
         ]]>
  	</insert>
+ 	<insert id="insertUserInfo" parameterType="hashmap" >
+ 		<![CDATA[
+            INSERT INTO whale_user
+                     ( 
+					   	GROUP_CD
+						,GROUP_NM
+						,CMPY_CD
+						,CMPY_NM
+						,TEAM_CD
+						,TEAM_NM
+						,POSITION_CD
+						,POSITION_NM
+						,USER_ID
+						,USER_NM
+						,PHON_NUM
+						,PASSWORD
+						,EMAIL
+						,CRE_DT
+						,CRE_ID
+						,UPD_DT
+						,UPD_ID
+						,THUMBNAIL
+					  ) VALUES
+					  (
+					   #{GROUP_CD}#
+						,#{GROUP_NM}#
+						,#{CMPY_CD}#
+						,#{CMPY_NM}#
+						,#{TEAM_CD}#
+						,#{TEAM_NM}#
+						,#{POSITION_CD}#
+						,#{POSITION_NM}#
+						,#{USER_ID}#
+						,#{USER_NM}#
+						,#{PHON_NUM}#
+						,#{PASSWORD}#
+						,#{EMAIL}#
+						,NOW()
+						,#{CRE_ID}#
+						,NOW()
+						,#{UPD_ID}#
+						,#{THUMBNAIL}#
+					  )
+					  
+  
+                       
+        ]]>
+ 	</insert>
  </mapper>
