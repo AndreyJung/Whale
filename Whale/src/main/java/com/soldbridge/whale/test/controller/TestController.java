@@ -103,5 +103,28 @@ public class TestController {
 		jsonStr = "{ \"result\" : "+jsonStr+" }";		
 		return jsonStr;
 	}
+	//칭찬 항목 리스트를 리턴 
+	@RequestMapping(value="/test/getRepuListAll.do", produces = "application/json; charset=utf8")
+	public @ResponseBody String getRepuListALL (CommandMap commandMap) throws Exception{
+		
+		if(commandMap.isEmpty() == false){
+	        Iterator<Entry<String,Object>> iterator = commandMap.getMap().entrySet().iterator();
+	        Entry<String,Object> entry = null;
+	        while(iterator.hasNext()){
+	            entry = iterator.next();
+	            log.debug("key : "+entry.getKey()+", value : "+entry.getValue());
+	        }
+	    }
+		
+		ObjectMapper om = new ObjectMapper();
+		List<Map<String, Object>> list = testService.getRepuListAll(commandMap.getMap());
+		
+		String jsonStr = om.writeValueAsString(list);
+		log.info("object to json : " + jsonStr);
+		
+		jsonStr = "{ \"result\" : "+jsonStr+" }";
+		
+		return jsonStr;
+	}
 	
 }

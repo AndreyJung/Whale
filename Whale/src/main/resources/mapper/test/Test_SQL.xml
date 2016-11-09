@@ -57,5 +57,13 @@
  		]]>
  	</select>
  	
+ 	<select id="getRepuListAll" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+ 			SELECT 
+				*
+			FROM
+				whale_repu_mst
+ 		]]>
+ 	</select>
  	
  </mapper>
