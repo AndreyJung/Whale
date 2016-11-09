@@ -10,4 +10,5 @@ public interface RegisterService {
 	Map<String, Long> userIdCheck(Map<String,Object> map, HttpServletRequest request) throws Exception;
 	String insertUser(Map<String, Object> map, HttpServletRequest request) throws Exception;
 	String insertUserInfo(Map<String,Object> map, HttpServletRequest request) throws Exception;
+	String insertUserSalt(Map<String,Object> map, HttpServletRequest request) throws Exception;
 }
