@@ -23,5 +23,11 @@ public class RegisterDAO extends AbstractDAO{
 		int result = (Integer)insert("register.insertUserInfo", map);
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Long> userIdCheck(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return (Map<String, Long>)selectOne("register.userIdCheck", map);
+	}
  
 }

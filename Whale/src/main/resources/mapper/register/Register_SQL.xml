@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="register">
+
+	<select id="userIdCheck" parameterType="hashmap" resultType="hashmap">
+			SELECT
+				COUNT(*) AS CNT
+			WHERE
+				user_id = #USER_ID#
+	</select>
+	
  	<insert id="insertUserMst" parameterType="hashmap" >
  		<![CDATA[
             INSERT INTO whale_user_mst

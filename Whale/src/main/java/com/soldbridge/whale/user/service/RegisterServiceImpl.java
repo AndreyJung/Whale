@@ -32,6 +32,12 @@ public class RegisterServiceImpl implements RegisterService {
 		// TODO Auto-generated method stub
 		return ""+registerDAO.insertUser(map);
 	}
+	
+	@Override
+	public Map<String, Long> userIdCheck(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		return registerDAO.userIdCheck(map);
+	}
 
 	@Override
 	public String insertUserInfo(Map<String, Object> map, HttpServletRequest request) throws Exception {

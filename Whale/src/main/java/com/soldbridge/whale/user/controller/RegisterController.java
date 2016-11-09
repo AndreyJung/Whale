@@ -1,5 +1,6 @@
 package com.soldbridge.whale.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,9 +8,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.soldbridge.whale.user.service.RegisterService;
@@ -20,6 +23,8 @@ public class RegisterController {
      
     @Resource(name="registerService")
     private RegisterService registerService;
+    
+    ObjectMapper om = new ObjectMapper(); 
      
     /*
     @RequestMapping(value="/user/registerUserJson.do")
@@ -32,6 +37,34 @@ public class RegisterController {
         return mv;
     }
     */
+    
+    @RequestMapping(value="/user/userIdCheck.do" , produces = "application/json; charset=utf8")
+    public @ResponseBody String userIdCheck(@RequestParam Map<String,Object> commandMap, HttpServletRequest request) throws Exception{
+    	log.info("USERID"+commandMap.get("USER_ID"));
+    	//JSON용 객체
+    	String jsonStr = "";
+    	
+    	//parameter check
+    	if("".equals(commandMap.get("USER_ID")) || commandMap.get("USER_ID") == null){
+    		jsonStr = "{ \"resultCd\" : F , \"msg\" : 아이디 입력 안하면 지옥감}";
+    		
+    	}else{
+    		Map<String, Long> list = registerService.userIdCheck(commandMap, request);
+    		
+            log.info("RESULT IS = "+list);
+            log.info("RESULT IS = "+list.get("CNT"));
+            if(list.get("CNT") == 0){
+            	jsonStr = "{ \"resultCd\" : S , \"msg\" : 사용가능한 아이디입니다}";
+            }else{
+            	jsonStr = "{ \"resultCd\" : F , \"msg\" : 이미 사용 중인 아이디입니다}";
+            }
+
+    	}
+    	
+    	return jsonStr;
+                
+
+    }
     
     @RequestMapping(value="/user/registerUser.do")
     public String registerUserMst(@RequestParam Map<String,Object> commandMap, HttpServletRequest request) throws Exception{
