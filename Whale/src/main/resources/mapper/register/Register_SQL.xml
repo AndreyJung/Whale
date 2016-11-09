@@ -6,8 +6,9 @@
 	<select id="userIdCheck" parameterType="hashmap" resultType="hashmap">
 			SELECT
 				COUNT(*) AS CNT
+			FROM whale_user_mst
 			WHERE
-				user_id = #USER_ID#
+				user_id = #{USER_ID}#
 	</select>
 	
  	<insert id="insertUserMst" parameterType="hashmap" >
@@ -85,5 +86,18 @@
   
                        
         ]]>
+ 	</insert>
+ 	<insert id="insertUserSalt" parameterType="hashmap" >
+			<![CDATA[
+				INSERT INTO whale_user_salt 
+				(	user_id
+				   ,salt
+				) VALUES
+				(
+					 #{USER_ID}#
+					,#{SALT}#
+				)
+				 
+			]]>
  	</insert>
  </mapper>

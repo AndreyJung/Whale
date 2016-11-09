@@ -71,5 +71,11 @@ public class RegisterServiceImpl implements RegisterService {
 		// TODO Auto-generated method stub
 		return ""+result;
 	}
+
+	@Override
+	public String insertUserSalt(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		return ""+registerDAO.insertUserSalt(map);
+	}
 	
 }
