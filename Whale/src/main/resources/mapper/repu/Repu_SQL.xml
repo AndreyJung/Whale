@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sample">
-	<select id="selectRepuItem" parameterType="hashmap" resultType="hashmap">
+	<select id="selectRepuTotItem" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
 				a.user_id,
@@ -17,6 +17,87 @@
 				a.user_id = b.user_id
 				AND
 				a.`user_id` = #{user_id}
+		]]>
+	</select>
+	
+	<!-- 평점 관리 테이블 데이터 존재 유무 확인 쿼리  -->
+	<select id="selectRepuItemChk" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS result_cnt
+			FROM
+				whale_repu a
+			WHERE 
+				a.`to_user_id` = #{to_user_id} 
+				AND
+				a.`from_user_id`= #{from_user_id}
+				AND
+				a.`repu_type_cd` IN ('01','02','03','04','05')
+		]]>
+	</select>
+	
+	<update id="updateRepuItem" parameterType="hashmap" >
+		<![CDATA[
+			UPDATE whale_repu
+			SET `repu_star_cnt` = #{repu_star_cnt}
+				, `upd_dt` = SYSDATE()
+				, `upd_id` = 'system'
+			WHERE 
+				`to_user_id` = #{to_user_id}
+				AND
+				`from_user_id` = #{from_user_id}
+				AND  
+				`repu_type_cd` = #{repu_type_cd};
+		]]>
+	</update>
+	
+	<insert id="insertRepuItem" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO whale_repu
+				(`to_user_id`
+				,`from_user_id`
+				,`repu_type_cd`
+				,`repu_type_nm`
+				,`repu_star_cnt`
+				,`cre_dt`
+				,`cre_id`
+				,`upd_dt`
+				,`upd_id`)
+			VALUES
+				(#{to_user_id}
+				,#{from_user_id}
+				,#{repu_type_cd}
+				,#{repu_type_nm}
+				,#{repu_star_cnt}
+				,SYSDATE()
+				,'system'
+				,SYSDATE()
+				,'system'
+				)
+		]]>
+	</insert>
+	
+	<!-- 평점 토탈 관리 테이블 데이터 존재 유무 확인 쿼리  -->
+	<select id="selectRepuTotItemChk" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS result_cnt
+			FROM
+				whale_tot_repu a
+			WHERE 
+				a.`user_id` = #{user_id}
+				AND
+				a.`repu_type_cd` IN ('01','02','03','04','05')
+		]]>
+	</select>
+	
+	<select id="selectRepuTypeInfo" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT
+				a.*
+			FROM
+				whale_repu_mst a
+			ORDER BY `repu_type_cd` ASC;
 		]]>
 	</select>
 </mapper>
