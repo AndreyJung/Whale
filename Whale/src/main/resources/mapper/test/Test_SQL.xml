@@ -21,17 +21,17 @@
  	
  	<select id="selectTestTotRepuParam" parameterType="hashmap" resultType="hashmap">
  		<![CDATA[
-			select
-				@ROWNUM := @ROWNUM + 1 AS ROWNUM, 
-				a.repu_type_nm, 
-				b.user_nm, 
-				b.thumbnail
-			from 
-				whale_tot_repu a, whale_user b, (SELECT @ROWNUM := 0) R
-			where 
-				a.user_id = b.user_id 
-				and 
-				a.repu_type_cd = #{repu_type_cd};
+			SELECT 
+				a.repu_type_nm, a.repu_sub_title, c.user_nm, c.thumbnail
+			FROM 
+				whale_repu_mst a, whale_tot_repu b, whale_user c
+			WHERE 
+				a.repu_type_cd = b.repu_type_cd
+				and b.user_id = c.user_id
+				and c.group_cd = (select group_cd from whale_user where user_id = #{user_id})
+				and c.cmpy_cd = (select cmpy_cd from whale_user where user_id = #{user_id}) 
+				and a.repu_type_cd = #{repu_type_cd}
+				order by b.avr_star_cnt desc limit 1;
         ]]>
  	</select>
  	
