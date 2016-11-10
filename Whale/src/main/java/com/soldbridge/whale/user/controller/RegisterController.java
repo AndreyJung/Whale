@@ -84,16 +84,18 @@ public class RegisterController {
         		String infoResult = registerUserInfo(commandMap, request);
         		
         		if ("1".equals(infoResult)){
-        			jsonStr = "{ \"resultCd\" : \"S\" , \"msg\" : \"SIGN UP COMPLETED\"}";
+        			jsonStr = "{ \"resultCd\" : \"S\" , \"msg\" : \"회원가입이 완료되었습니다\"}";
                 	
         		} else {
-        			jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"FAILING DURING INSERT INFO\"}";
+        			jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"일시적인 오류가 발생하였습니다. "
+        					+ "\n잠시 후에 다시 시도하여 주세요\"}";
                 	
         		}
         	
        
         } else {
-        	jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"FAILING DURING INSERT MASTER\"}";
+        	jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"일시적인 오류가 발생하였습니다"
+        			+ "\n 잠시 후에 다시 사도하여 주세요\"}";
         }
         log.info("RESULT IS"+result);
         log.debug("returning JSON IS " + jsonStr);
