@@ -22,7 +22,7 @@
  	<select id="selectTestTotRepuParam" parameterType="hashmap" resultType="hashmap">
  		<![CDATA[
 			SELECT 
-				a.repu_type_nm, a.repu_sub_title, c.user_nm, c.thumbnail
+				a.repu_type_nm, a.repu_sub_title, c.user_nm, c.thumbnail, c.user_id
 			FROM 
 				whale_repu_mst a, whale_tot_repu b, whale_user c
 			WHERE 
