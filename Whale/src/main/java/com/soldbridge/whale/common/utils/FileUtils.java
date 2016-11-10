@@ -45,7 +45,7 @@ public class FileUtils {
                 originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
                 storedFileName = CommonUtils.getRandomString() + originalFileExtension;
                  
-                file = new File(filePath + originalFileName+originalFileExtension);
+                file = new File(filePath + originalFileName);
                 multipartFile.transferTo(file);
                  
                 listMap = new HashMap<String,Object>();
