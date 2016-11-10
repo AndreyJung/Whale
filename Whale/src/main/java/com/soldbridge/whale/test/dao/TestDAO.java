@@ -30,6 +30,13 @@ public class TestDAO extends AbstractDAO{
 	public List<Map<String, Object>> selectIFTestUserList(Map<String, Object> map){
 		return (List<Map<String, Object>>)selectList("selectIFTestUserList",map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> getRepuListAll(Map<String, Object> map){
+		return (List<Map<String, Object>>)selectList("getRepuListAll",map);
+	}
+	
+	
 }
 
 
