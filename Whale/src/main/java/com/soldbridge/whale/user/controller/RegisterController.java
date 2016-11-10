@@ -67,7 +67,7 @@ public class RegisterController {
     }
     
     @RequestMapping(value="/user/registerUser.do",  produces = "application/json; charset=utf8")
-    public String registerUserMst(@RequestParam Map<String,Object> commandMap, HttpServletRequest request) throws Exception{
+    public @ResponseBody String registerUserMst(@RequestParam Map<String,Object> commandMap, HttpServletRequest request) throws Exception{
     	log.info("USERID"+commandMap.get("USER_ID"));
     	log.info("USER NAME"+commandMap.get("USER_NM"));
     	log.info("USER PASSWORD"+commandMap.get("PASSWORD"));
@@ -80,9 +80,6 @@ public class RegisterController {
         
         if ("1".equals(result)){
         
-        	String saltResult = registerUserSalt(commandMap, request);
-        	
-        	if ("1".equals(saltResult)){
         		// 사용자 정보 테이블 인서트 
         		String infoResult = registerUserInfo(commandMap, request);
         		
@@ -93,16 +90,14 @@ public class RegisterController {
         			jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"FAILING DURING INSERT INFO\"}";
                 	
         		}
-        	} else {
-        		jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"FAILING DURING INSERT SALT\"}";
-        	}
         	
-        	
-        
+       
         } else {
         	jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"FAILING DURING INSERT MASTER\"}";
         }
         log.info("RESULT IS"+result);
+        log.debug("returning JSON IS " + jsonStr);
+		
         return jsonStr;
     }
     
