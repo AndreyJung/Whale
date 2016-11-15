@@ -23,8 +23,8 @@ public class RepuController {
 	@Resource(name = "repuService")
 	private RepuService repuService;
 	
-	@RequestMapping(value="/repu/selectRepuItem.do", produces = "application/json; charset=utf8")
-	public @ResponseBody String selectRepuItem(CommandMap commandMap) throws Exception{
+	@RequestMapping(value="/repu/selectRepuTotItem.do", produces = "application/json; charset=utf8")
+	public @ResponseBody String selectRepuTotItem(CommandMap commandMap) throws Exception{
 		
 		//전달받은 파라미터 출력 
 		if(commandMap.isEmpty() == false){
@@ -36,15 +36,36 @@ public class RepuController {
 	        }
 	    }
 		
-		ObjectMapper om = new ObjectMapper();
-		List<Map<String, Object>> list = repuService.selectRepuItem(commandMap.getMap());
 		
+		List<Map<String, Object>> list = repuService.selectRepuTotItem(commandMap.getMap());
+		
+		ObjectMapper om = new ObjectMapper();
 		// Map or List Object 를 JSON 문자열로 변환
 		String jsonStr = om.writeValueAsString(list);
-		log.info("object to json : " + jsonStr);
+		log.info("object to json : " + jsonStr);		
+		jsonStr = "{ \"result\" : "+jsonStr+" }";		
+		return jsonStr;
+	}
+	
+	@RequestMapping(value="/repu/saveRepu.do", produces = "application/json; charset=utf8")
+	public @ResponseBody String saveRepu(CommandMap commandMap) throws Exception{
+		//전달받은 파라미터 출력 
+		if(commandMap.isEmpty() == false){
+	        Iterator<Entry<String,Object>> iterator = commandMap.getMap().entrySet().iterator();
+	        Entry<String,Object> entry = null;
+	        while(iterator.hasNext()){
+	            entry = iterator.next();
+	            log.debug("key : "+entry.getKey()+", value : "+entry.getValue());
+	        }
+	    }
 		
-		jsonStr = "{ \"result\" : "+jsonStr+" }";
+		Map<String,Object> map = repuService.saveRepu(commandMap.getMap());
 		
+		ObjectMapper om = new ObjectMapper();
+		// Map or List Object 를 JSON 문자열로 변환
+		String jsonStr = om.writeValueAsString(map);
+		log.info("object to json : " + jsonStr);		
+		jsonStr = "{ \"result\" : "+jsonStr+" }";		
 		return jsonStr;
 	}
 }

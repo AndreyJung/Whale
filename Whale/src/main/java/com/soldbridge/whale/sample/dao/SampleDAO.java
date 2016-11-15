@@ -21,5 +21,22 @@ public class SampleDAO extends AbstractDAO{
 		// TODO Auto-generated method stub
 		return (List<Map<String, Object>>)selectList("sample.getCompanyList", map);
 	}
+	
+	public void insertBoard(Map<String, Object> map) throws Exception{
+	    insert("sample.insertBoard", map);
+	}
+	
+	public void updateHitCnt(Map<String, Object> map) throws Exception{
+	    update("sample.updateHitCnt", map);
+	}
+	 
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectBoardDetail(Map<String, Object> map) throws Exception{
+	    return (Map<String, Object>) selectOne("sample.selectBoardDetail", map);
+	}
+	
+	public void updateBoard(Map<String, Object> map) throws Exception{
+	    update("sample.updateBoard", map);
+	}
  
 }

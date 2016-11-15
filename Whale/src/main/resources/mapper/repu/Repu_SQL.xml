@@ -6,7 +6,7 @@
 		<![CDATA[
 			SELECT
 				user_id,
-				user_nm,
+				user_nm
 				repu_type_cd,
 				repu_type_nm,
 				avr_star_cnt,
@@ -33,7 +33,7 @@
 				a.`repu_type_cd` IN ('01','02','03','04','05')
 		]]>
 	</select>
-	
+
 	<update id="updateRepuItem" parameterType="hashmap" >
 		<![CDATA[
 			UPDATE whale_repu
@@ -68,9 +68,9 @@
 				,#{repu_type_nm}
 				,#{repu_star_cnt}
 				,SYSDATE()
-				,'system'
+				,'SYSTEM'
 				,SYSDATE()
-				,'system'
+				,'SYSTEM'
 				)
 		]]>
 	</insert>
@@ -79,11 +79,11 @@
 	<select id="selectRepuTotItemChk" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
-				COUNT(*) AS result_cnt
+				COUNT(*) AS result_tot_cnt
 			FROM
 				whale_tot_repu a
 			WHERE 
-				a.`user_id` = #{user_id}
+				a.`user_id` = #{to_user_id}
 				AND
 				a.`repu_type_cd` IN ('01','02','03','04','05')
 		]]>
@@ -98,4 +98,71 @@
 			ORDER BY `repu_type_cd` ASC;
 		]]>
 	</select>
+	
+	<!-- 사람별, 항목별 총 별점 합 조회 -->
+	<select id="selectRepuStartCntByUserAndRepuType" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				SUM(`repu_star_cnt`) AS avr_star_cnt
+			FROM 
+				whale_repu
+			WHERE `to_user_id` = #{to_user_id}
+			AND `repu_type_cd` = #{repu_type_cd}
+		]]>
+	</select>
+	
+	<!-- 사람별, 항목별 점수 준 사람 수  -->
+	<select id="selectRepuFromUserCntByUserAndRepuType" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				COUNT(`from_user_id`) AS from_user_cnt
+			FROM whale_repu
+			WHERE `to_user_id` = #{to_user_id}
+			AND 
+			`repu_type_cd` = #{repu_type_cd}
+		]]>
+	</select>
+	
+	<!-- 사람별, 항목별 평점 토탈 테이블 정보 수정 -->
+	<update id="updateRepuTotByUserAndRePuType" parameterType="hashmap">
+		<![CDATA[
+			UPDATE whale_tot_repu
+			SET `avr_star_cnt` = #{avr_star_cnt}
+				,`from_user_cnt` = #{from_user_cnt}
+				,`upd_dt` = SYSDATE()
+				,`upd_id` = 'SYSTEM'
+			WHERE 
+				`user_id` = #{to_user_id}
+				AND
+				`repu_type_cd` = #{repu_type_cd}
+		]]>
+	</update>
+	
+	<!-- 사람별, 항목별 평점 토탈 테이블 정보 추가 -->
+	<insert id="insertRepuTotByUserAndRepuType" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO `whale_tot_repu` 
+				(`user_id`, 
+				`user_nm`, 
+				`repu_type_cd`, 
+				`repu_type_nm`, 
+				`avr_star_cnt`, 
+				`from_user_cnt`, 
+				`cre_dt`, 
+				`cre_id`, 
+				`upd_dt`, 
+				`upd_id`)
+			VALUES
+				(#{to_user_id}, 
+				(SELECT user_nm FROM whale_user WHERE user_id = #{to_user_id}), 
+				#{repu_type_cd}, 
+				#{repu_type_nm}, 
+				#{avr_star_cnt}, 
+				#{from_user_cnt}, 
+				SYSDATE(), 
+				'SYSTEM', 
+				SYSDATE(), 
+				'SYSTEM');
+		]]>
+	</insert>
 </mapper>

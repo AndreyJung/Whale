@@ -28,4 +28,21 @@ public class SampleServiceImpl implements SampleService {
 		// TODO Auto-generated method stub
 		return sampleDAO.getCompanyList(map);
 	}
+	
+	@Override
+	public void insertBoard(Map<String, Object> map) throws Exception {
+	    sampleDAO.insertBoard(map);
+	}
+	
+	@Override
+	public Map<String, Object> selectBoardDetail(Map<String, Object> map) throws Exception {
+	    sampleDAO.updateHitCnt(map);
+	    Map<String, Object> resultMap = sampleDAO.selectBoardDetail(map);
+	    return resultMap;
+	}
+	
+	@Override
+	public void updateBoard(Map<String, Object> map) throws Exception{
+	    sampleDAO.updateBoard(map);
+	}
 }
