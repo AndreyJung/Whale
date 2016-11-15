@@ -6,7 +6,7 @@
 		<![CDATA[
 			SELECT
 				user_id,
-				user_nm
+				user_nm,
 				repu_type_cd,
 				repu_type_nm,
 				avr_star_cnt,
