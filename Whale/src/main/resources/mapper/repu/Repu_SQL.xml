@@ -39,7 +39,7 @@
 			UPDATE whale_repu
 			SET `repu_star_cnt` = #{repu_star_cnt}
 				, `upd_dt` = SYSDATE()
-				, `upd_id` = 'system'
+				, `upd_id` = 'SYSTEM'
 			WHERE 
 				`to_user_id` = #{to_user_id}
 				AND
@@ -103,7 +103,7 @@
 	<select id="selectRepuStartCntByUserAndRepuType" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT 
-				SUM(`repu_star_cnt`) AS avr_star_cnt
+				SUM(`repu_star_cnt`) AS repu_star_cnt
 			FROM 
 				whale_repu
 			WHERE `to_user_id` = #{to_user_id}
@@ -165,4 +165,26 @@
 				'SYSTEM');
 		]]>
 	</insert>
+	
+	<!-- 개인이 개인에게 칭찬한 항목별 평가점수 조회   -->
+	<select id="selectRepuItemByUser" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				`to_user_id`
+				,`from_user_id`
+				,`repu_type_cd`
+				,`repu_type_nm`
+				,`repu_star_cnt`
+				,`cre_dt`
+				,`cre_id`
+				,`upd_dt`
+				,`upd_id`
+			FROM 
+				whale_repu
+			WHERE
+				`to_user_id`=#{to_user_id}
+				AND
+				`from_user_id`=#{from_user_id}
+		]]>
+	</select>
 </mapper>

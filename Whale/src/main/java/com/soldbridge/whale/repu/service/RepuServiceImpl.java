@@ -27,6 +27,7 @@ public class RepuServiceImpl implements RepuService{
 	//평판항목 저장하기 
 	@Override
 	public Map<String,Object> saveRepu(Map<String, Object> map) throws Exception{
+
 		
 		//리턴할 결과 저장하는 MAP
 		Map<String, Object> result_IOS = new HashMap<String, Object>();
@@ -75,6 +76,7 @@ public class RepuServiceImpl implements RepuService{
 		//데이터 문제 발생 
 		else {
 			log.info("평판 저장하기 데이터 문제 발생 확인 필요 ");
+			throw new Exception();
 		}
 		
 		//평판 전체 합 테이블 데이터 조회 
@@ -99,8 +101,11 @@ public class RepuServiceImpl implements RepuService{
 				Map<String, Object> result_repu_star_cnt = repuDAO.selectRepuStartCntByUserAndRepuType(map3);
 				Map<String, Object> result_repu_user_cnt = repuDAO.selectRepuFromUserCntByUserAndRepuType(map3);
 				
-				String avr_star_cnt = result_repu_star_cnt.get("avr_star_cnt").toString();
+				String repu_star_cnt = result_repu_star_cnt.get("repu_star_cnt").toString();
 				String from_user_cnt = result_repu_user_cnt.get("from_user_cnt").toString();
+				
+				float avr_star_cnt = Float.parseFloat(repu_star_cnt) / Float.parseFloat(from_user_cnt);
+				log.info("avr_star_cnt : "+avr_star_cnt);
 				
 				map3.put("avr_star_cnt", avr_star_cnt);
 				map3.put("from_user_cnt", from_user_cnt);
@@ -128,8 +133,11 @@ public class RepuServiceImpl implements RepuService{
 				Map<String, Object> result_repu_star_cnt = repuDAO.selectRepuStartCntByUserAndRepuType(map3);
 				Map<String, Object> result_repu_user_cnt = repuDAO.selectRepuFromUserCntByUserAndRepuType(map3);
 				
-				String avr_star_cnt = result_repu_star_cnt.get("avr_star_cnt").toString();
+				String repu_star_cnt = result_repu_star_cnt.get("repu_star_cnt").toString();
 				String from_user_cnt = result_repu_user_cnt.get("from_user_cnt").toString();
+			
+				float avr_star_cnt = Float.parseFloat(repu_star_cnt) / Float.parseFloat(from_user_cnt);
+				log.info("avr_star_cnt : "+avr_star_cnt);
 				
 				map3.put("repu_type_nm", repu_type_nm);
 				map3.put("avr_star_cnt", avr_star_cnt);
@@ -143,11 +151,17 @@ public class RepuServiceImpl implements RepuService{
 		//평판 합계 데이터 문제 발생 
 		else {
 			log.info("평판 저장하기 데이터 문제 발생 확인 필요 ");
+			throw new Exception();
 		}
 		
 		result_IOS.put("result", "success");
 		
 		return result_IOS;
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectRepuItemByUser(Map<String, Object> map) throws Exception{
+		return repuDAO.selectRepuItemByUser(map);
 	}
 	
 }

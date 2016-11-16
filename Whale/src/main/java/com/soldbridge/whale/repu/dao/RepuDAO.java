@@ -55,4 +55,9 @@ public class RepuDAO extends AbstractDAO{
 	public void insertRepuTotByUserAndRepuType(Map<String, Object> map) throws Exception{
 		insert("insertRepuTotByUserAndRepuType",map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectRepuItemByUser(Map<String, Object> map){
+		return (List<Map<String, Object>>) selectList("selectRepuItemByUser",map);
+	}
 }

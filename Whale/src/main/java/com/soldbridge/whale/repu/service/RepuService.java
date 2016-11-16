@@ -7,4 +7,6 @@ public interface RepuService {
 	List<Map<String, Object>> selectRepuTotItem(Map<String, Object> commandMap) throws Exception;
 	
 	Map<String,Object> saveRepu(Map<String, Object> commandMap) throws Exception;
+	
+	List<Map<String, Object>> selectRepuItemByUser(Map<String, Object> commandMap) throws Exception;
 }
