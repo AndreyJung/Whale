@@ -18,13 +18,13 @@ public class LoginDAO extends AbstractDAO{
 	}
 	
 	public int updateLoginInfo(Map<String, Object> map) throws Exception{
-		int result = (Integer)update("login.updateLoginUser",map);
+		int result = (Integer)update("login.updateLoginInfo",map);
 		return result ; 
 	}
 	
 	
 	public int logoutProc(Map<String, Object> map){
-		int result = (Integer)update("login.updateLogoutUser",map);
+		int result = (Integer)update("login.updateLogoutInfo",map);
 		return result ; 
 	}
 	

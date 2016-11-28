@@ -28,7 +28,14 @@ public class LoginServiceImpl implements LoginService{
 		
 		// Login date , Login Status Update
 		if ( loginUserInfo != null ){
+			
+			map.remove("LOGIN_STATUS");
 			map.put("LOGIN_STATUS", "Y");
+			
+			log.debug("USER_ID IS " + map.get("USER_ID") +"LOGIN_STATUS" + map.get("LOGIN_STATUS"));
+			
+			
+			
 			int result = loginDAO.updateLoginInfo(map);
 			loginUserInfo.put("LOGIN_SUCCESS", "Y");
 			loginUserInfo.put("RETURN_MSG", "로그인이 성공하였습니다");
