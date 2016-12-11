@@ -34,5 +34,49 @@ public class MyPageServiceImpl implements MyPageService {
 		// TODO Auto-generated method stub
 		return myPageDAO.getUserInfo(map);
 	}
+
+
+	@Override
+	public String saveMyInfo(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		log.debug("===save my INFO === USER_ID :"+ map.get("USER_ID"));
+		return ""+myPageDAO.updateUserMst(map);
+	}
+
+
+	@Override
+	public String saveSubInfo(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		
+		   
+	    MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    MultipartFile multipartFile = null;
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	            log.debug("------------- file start -------------");
+	            log.debug("name : "+multipartFile.getName());
+	            log.debug("filename : "+multipartFile.getOriginalFilename());
+	            log.debug("size : "+multipartFile.getSize());
+	            log.debug("-------------- file end --------------\n");
+	            
+	           
+	        }
+	    }
+	    
+	    
+	    List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(map, request);
+	    int result = 0;
+	    for(int i=0, size=list.size(); i<size; i++){
+        	 map.put("THUMBNAIL", list.get(i).get("ORIGINAL_FILE_NAME"));
+        	 log.debug("FOR USER_INFO FILE NAME IS "+list.get(i).get("ORIGINAL_FILE_NAME"));
+        	
+        }
+	    result = myPageDAO.updateSubInfo(map);
+		// TODO Auto-generated method stub
+		return ""+result;
+		
+	}
 	
 }

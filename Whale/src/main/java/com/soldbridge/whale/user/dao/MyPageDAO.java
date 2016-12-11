@@ -17,5 +17,17 @@ public class MyPageDAO extends AbstractDAO{
 		return (Map<String, String>)selectOne("myPage.getUserInfo", map);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public int updateUserMst(Map<String, Object> map) {
+		
+		return (Integer)update("myPage.updateUserMst", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int updateSubInfo(Map<String, Object> map) {
+		
+		return (Integer)update("myPage.updateUserSub", map);
+	}
+	
  
 }

@@ -27,4 +27,43 @@
 				user_id = #{USER_ID}#
 	</select>
 	
+	<update id="updateUserMst" parameterType="hashmap" >
+ 	
+            UPDATE  whale_user_mst
+            set  upd_dt = NOW()
+            	,upd_id = #{USER_ID}
+            	,password = #{PASSWORD}
+            where user_id = #{USER_ID}
+					         
+        
+ 	</update>
+ 	
+	<update id="updateUserSub" parameterType="hashmap" >
+ 		<![CDATA[
+            UPDATE whale_user
+                 set
+					   	 GROUP_CD	=  						#{GROUP_CD}#
+						,GROUP_NM 	= 						#{GROUP_NM}#
+						,CMPY_CD	= 						#{CMPY_CD}#
+						,CMPY_NM	= 						#{CMPY_NM}#
+						,TEAM_CD	= 						#{TEAM_CD}#
+						,TEAM_NM	= 						#{TEAM_NM}#
+						,POSITION_CD= 						#{POSITION_CD}#
+						,POSITION_NM= 						#{POSITION_NM}#
+						,USER_ID	= 						#{USER_ID}#
+						,USER_NM	= 						#{USER_NM}#
+						,PHON_NUM	= 						#{PHON_NUM}#
+						,PASSWORD	= 						#{PASSWORD}#
+						,EMAIL		= 						#{EMAIL}#
+						,CRE_DT		= 						NOW()
+						,CRE_ID		= 						#{CRE_ID}#
+						,UPD_DT		= 						NOW()
+						,UPD_ID		= 						#{UPD_ID}#
+						,THUMBNAIL  = 						#{THUMBNAIL}#
+				where  user_id = #{USER_ID}
+						  
+                       
+        ]]>
+ 	</update>
+	
  </mapper>

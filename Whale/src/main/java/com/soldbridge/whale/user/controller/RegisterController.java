@@ -95,7 +95,7 @@ public class RegisterController {
        
         } else {
         	jsonStr = "{ \"resultCd\" : \"F\" , \"msg\" : \"일시적인 오류가 발생하였습니다"
-        			+ "\n 잠시 후에 다시 사도하여 주세요\"}";
+        			+ "\n 잠시 후에 다시 시도하여 주세요\"}";
         }
         log.info("RESULT IS"+result);
         log.debug("returning JSON IS " + jsonStr);
