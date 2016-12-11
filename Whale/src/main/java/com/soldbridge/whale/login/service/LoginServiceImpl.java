@@ -54,7 +54,7 @@ public class LoginServiceImpl implements LoginService{
 		
 		Map<String, Object> outputMap = new HashMap<String, Object>();
 		
-		if ( map.get("LOGIN_ID") != null ){
+		if ( map.get("USER_ID") != null ){
 			// logout Status Update 
 			
 			map.put("LOGIN_STATUS", "N");
