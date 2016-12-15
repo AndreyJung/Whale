@@ -164,4 +164,8 @@ public class RepuServiceImpl implements RepuService{
 		return repuDAO.selectRepuItemByUser(map);
 	}
 	
+	@Override
+	public Map<String, Object> selectUserProfile(Map<String, Object> map) throws Exception{
+		return repuDAO.selectUserProfile(map);
+	}
 }

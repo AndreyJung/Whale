@@ -38,9 +38,18 @@
  	<select id="selectIFTestCompanyList" parameterType="hashmap" resultType="hashmap">
  		<![CDATA[
  			SELECT 
- 				*
- 			FROM
- 				whale_cmpy_info;		
+				group_cd,
+				group_nm,
+				cmpy_cd,
+				cmpy_nm,
+				(select count(*) from whale_user where cmpy_cd = a.cmpy_cd) as emplys_cnt,
+				cre_dt,
+				cre_id,
+				upd_dt,
+				upd_id,
+				cmpy_logo_img 				
+			FROM
+				whale_cmpy_info a;		
  		]]>
  	</select>
  	

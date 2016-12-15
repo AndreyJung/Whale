@@ -187,4 +187,16 @@
 				`from_user_id`=#{from_user_id}
 		]]>
 	</select>
+	
+	<!-- 사용자 이미지 섬네일 조회 -->
+	<select id="selectUserProfile" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				thumbnail
+			FROM 
+				whale_user
+			WHERE 
+				user_id = #{user_id}
+		]]>
+	</select>
 </mapper>

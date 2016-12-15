@@ -60,4 +60,10 @@ public class RepuDAO extends AbstractDAO{
 	public List<Map<String, Object>> selectRepuItemByUser(Map<String, Object> map){
 		return (List<Map<String, Object>>) selectList("selectRepuItemByUser",map);
 	}
+	
+	//사용자 이미지 섬네일 조회
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectUserProfile(Map<String, Object> map){
+		return (Map<String, Object>)selectOne("selectUserProfile",map);
+	}
 }
