@@ -39,7 +39,7 @@
  	</update>
  	
 	<update id="updateUserSub" parameterType="hashmap" >
- 		<![CDATA[
+ 		
             UPDATE whale_user
                  set
 					   	 GROUP_CD	=  						#{GROUP_CD}#
@@ -59,11 +59,14 @@
 						,CRE_ID		= 						#{CRE_ID}#
 						,UPD_DT		= 						NOW()
 						,UPD_ID		= 						#{UPD_ID}#
+					<if test="THUMBNAIL != null and THUMBNAIL == ''">
 						,THUMBNAIL  = 						#{THUMBNAIL}#
+					</if>
+						
 				where  user_id = #{USER_ID}
 						  
                        
-        ]]>
+       
  	</update>
 	
  </mapper>

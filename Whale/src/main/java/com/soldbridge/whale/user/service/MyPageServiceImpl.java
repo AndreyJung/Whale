@@ -73,6 +73,8 @@ public class MyPageServiceImpl implements MyPageService {
         	 log.debug("FOR USER_INFO FILE NAME IS "+list.get(i).get("ORIGINAL_FILE_NAME"));
         	
         }
+	    
+	    log.debug("FROM MY PAGE THUMBNAIL"  + map.get("THUMBNAIL"));
 	    result = myPageDAO.updateSubInfo(map);
 		// TODO Auto-generated method stub
 		return ""+result;
